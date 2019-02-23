@@ -4,4 +4,4 @@ Cisco API documentation can be found here:
 
 https://developer.cisco.com/psirt/
 
-https://github.com/CiscoPSIRT/openVulnAPIß
+https://github.com/CiscoPSIRT/openVulnAPI
