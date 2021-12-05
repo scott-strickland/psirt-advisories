@@ -16,8 +16,10 @@ def return_credentials():
         """
         json_data = json.load(json_file)
         data = dict()
-        client_id = json_data['client_id']; client_secret = json_data['client_secret']
-        data ['client_id']=client_id; data['client_secret']=client_secret
+        client_id = json_data['client_id']
+        client_secret = json_data['client_secret']
+        data['client_id'] = client_id
+        data['client_secret'] = client_secret
     return data
 
 
@@ -32,7 +34,7 @@ def get_oauth_token(client_id, client_secret, grant_type='client_credentials'):
         "grant_type": grant_type,
         "client_id": client_id,
         "client_secret": client_secret,
-        }
+    }
     response = requests.request("POST", url, params=querystring)
     response.raise_for_status()
     return response.json()['access_token']
@@ -48,15 +50,16 @@ def get_all_advisories(access_token):
     headers = {
         'authorization': "Bearer " + access_token,
         'Accept': 'application/json',
-        }
-    response = requests.request("GET", url, headers=headers, params=querystring)
+    }
+    response = requests.request(
+        "GET", url, headers=headers, params=querystring)
     response.raise_for_status()
     return response
 
 
 def create_json_file():
     access_token = get_oauth_token(client_id, client_secret)
-    response =  get_all_advisories(access_token)
+    response = get_all_advisories(access_token)
     data = response.json()['advisories']
     advisories = json.dumps(data)
     advisory_data = json.loads(advisories)
